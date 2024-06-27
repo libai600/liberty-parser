@@ -18,19 +18,19 @@ add_custom_command(
   DEPENDS desc/syntax.cmos.desc desc/syntax.fpga.desc
 )
 
-# gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k \* -D group_lookup --output-file=group_lookup.c
+# gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
 add_custom_command(
   COMMENT "gperf generating group_lookup.c"
-  COMMAND gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k \\* -D group_lookup --output-file=group_lookup.c
+  COMMAND gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   OUTPUT group_lookup.c
   DEPENDS group_lookup
 )
 
-# gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k \* -D attr_lookup --output-file=attr_lookup.c
+# gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
 add_custom_command(
   COMMENT "gperf generating attr_lookup.c"
-  COMMAND gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k \\* -D attr_lookup --output-file=attr_lookup.c
+  COMMAND gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   OUTPUT attr_lookup.c
   DEPENDS attr_lookup
