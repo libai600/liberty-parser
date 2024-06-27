@@ -18,7 +18,7 @@
 
 #include "syntax.h"
 #include "si2dr_liberty.h"
-#include "string.h"
+#include <strings.h>
 #include <stdlib.h>
 #include <math.h>
 #ifdef DMALLOC

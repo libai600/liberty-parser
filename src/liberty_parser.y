@@ -19,7 +19,6 @@ rights and limitations under the License.
 
     ******************************************************************************/
 #include <stdio.h>
-#include <alloca.h>
 #include <stdlib.h>
 #include <string.h>
 #include "liberty_structs.h"
@@ -32,6 +31,12 @@ rights and limitations under the License.
 #include "dmalloc.h"
 #endif
 #include "mymalloc.h" /* meant to override the my_*alloc calls if dmalloc defined*/
+
+#ifdef _MSC_VER
+#include <malloc.h>
+#else
+#include <alloca.h>
+#endif
 
    static si2drGroupIdT gs[1000];
    static int gsindex = 0;
