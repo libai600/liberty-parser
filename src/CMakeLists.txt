@@ -47,6 +47,11 @@ add_custom_command(
 # gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k \* -D group_lookup --output-file=group_lookup.c
 # gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k \* -D attr_lookup --output-file=attr_lookup.c
 
+# flex synttok.l
+# bison syntax_parser.y -p syntax_parser_ -o syntax_parser.c -H
+# flex token.l
+# bison liberty_parser.y -p liberty_parser_ -o liberty_parser.c -H
+
 add_library(si2dr_liberty STATIC
   PI.c token.c mymalloc.c libhash.c libstrtab.c
   liberty_parser.c liberty_front_lex.c syntax_checks.c 

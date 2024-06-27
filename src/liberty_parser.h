@@ -1,8 +1,9 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -30,6 +31,10 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 #ifndef YY_LIBERTY_PARSER_LIBERTY_PARSER_H_INCLUDED
 # define YY_LIBERTY_PARSER_LIBERTY_PARSER_H_INCLUDED
 /* Debug traces.  */
@@ -40,61 +45,44 @@
 extern int liberty_parser_debug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    COMMA = 258,
-    SEMI = 259,
-    LPAR = 260,
-    RPAR = 261,
-    LCURLY = 262,
-    RCURLY = 263,
-    COLON = 264,
-    KW_DEFINE = 265,
-    KW_DEFINE_GROUP = 266,
-    KW_TRUE = 267,
-    KW_FALSE = 268,
-    PLUS = 269,
-    MINUS = 270,
-    MULT = 271,
-    DIV = 272,
-    EQ = 273,
-    UNARY = 274,
-    NUM = 275,
-    STRING = 276,
-    IDENT = 277
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    COMMA = 258,                   /* COMMA  */
+    SEMI = 259,                    /* SEMI  */
+    LPAR = 260,                    /* LPAR  */
+    RPAR = 261,                    /* RPAR  */
+    LCURLY = 262,                  /* LCURLY  */
+    RCURLY = 263,                  /* RCURLY  */
+    COLON = 264,                   /* COLON  */
+    KW_DEFINE = 265,               /* KW_DEFINE  */
+    KW_DEFINE_GROUP = 266,         /* KW_DEFINE_GROUP  */
+    KW_TRUE = 267,                 /* KW_TRUE  */
+    KW_FALSE = 268,                /* KW_FALSE  */
+    PLUS = 269,                    /* PLUS  */
+    MINUS = 270,                   /* MINUS  */
+    MULT = 271,                    /* MULT  */
+    DIV = 272,                     /* DIV  */
+    EQ = 273,                      /* EQ  */
+    UNARY = 274,                   /* UNARY  */
+    NUM = 275,                     /* NUM  */
+    STRING = 276,                  /* STRING  */
+    IDENT = 277                    /* IDENT  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Tokens.  */
-#define COMMA 258
-#define SEMI 259
-#define LPAR 260
-#define RPAR 261
-#define LCURLY 262
-#define RCURLY 263
-#define COLON 264
-#define KW_DEFINE 265
-#define KW_DEFINE_GROUP 266
-#define KW_TRUE 267
-#define KW_FALSE 268
-#define PLUS 269
-#define MINUS 270
-#define MULT 271
-#define DIV 272
-#define EQ 273
-#define UNARY 274
-#define NUM 275
-#define STRING 276
-#define IDENT 277
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-
 union YYSTYPE
 {
-#line 71 "liberty_parser.y" /* yacc.c:1909  */
+#line 71 "liberty_parser.y"
 
       char *str;
       xnumber num;
@@ -106,9 +94,9 @@ union YYSTYPE
       si2drExprT *expr;
    
 
-#line 110 "liberty_parser.h" /* yacc.c:1909  */
-};
+#line 98 "liberty_parser.h"
 
+};
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -117,6 +105,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE liberty_parser_lval;
 
+
 int liberty_parser_parse (void);
+
 
 #endif /* !YY_LIBERTY_PARSER_LIBERTY_PARSER_H_INCLUDED  */
