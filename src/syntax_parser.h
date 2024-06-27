@@ -1,8 +1,9 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -30,6 +31,10 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 #ifndef YY_SYNTAX_PARSER_SYNTAX_PARSER_H_INCLUDED
 # define YY_SYNTAX_PARSER_SYNTAX_PARSER_H_INCLUDED
 /* Debug traces.  */
@@ -40,75 +45,51 @@
 extern int syntax_parser_debug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    COMMA = 258,
-    SEMI = 259,
-    LPAR = 260,
-    RPAR = 261,
-    LCURLY = 262,
-    RCURLY = 263,
-    COLON = 264,
-    LBRACK = 265,
-    RBRACK = 266,
-    KW_FLOAT = 267,
-    KW_STRING = 268,
-    KW_ENUM = 269,
-    KW_UNK_ARGS = 270,
-    KW_INTEGER = 271,
-    KW_VIRTATTR = 272,
-    KW_SHORT = 273,
-    KW_OR = 274,
-    KW_AND = 275,
-    KW_BOOLEAN = 276,
-    COLONEQ = 277,
-    KW_LIST = 278,
-    GREATERTHAN = 279,
-    LESSTHAN = 280,
-    DOTS = 281,
-    NUM = 282,
-    STRING = 283,
-    IDENT = 284
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    COMMA = 258,                   /* COMMA  */
+    SEMI = 259,                    /* SEMI  */
+    LPAR = 260,                    /* LPAR  */
+    RPAR = 261,                    /* RPAR  */
+    LCURLY = 262,                  /* LCURLY  */
+    RCURLY = 263,                  /* RCURLY  */
+    COLON = 264,                   /* COLON  */
+    LBRACK = 265,                  /* LBRACK  */
+    RBRACK = 266,                  /* RBRACK  */
+    KW_FLOAT = 267,                /* KW_FLOAT  */
+    KW_STRING = 268,               /* KW_STRING  */
+    KW_ENUM = 269,                 /* KW_ENUM  */
+    KW_UNK_ARGS = 270,             /* KW_UNK_ARGS  */
+    KW_INTEGER = 271,              /* KW_INTEGER  */
+    KW_VIRTATTR = 272,             /* KW_VIRTATTR  */
+    KW_SHORT = 273,                /* KW_SHORT  */
+    KW_OR = 274,                   /* KW_OR  */
+    KW_AND = 275,                  /* KW_AND  */
+    KW_BOOLEAN = 276,              /* KW_BOOLEAN  */
+    COLONEQ = 277,                 /* COLONEQ  */
+    KW_LIST = 278,                 /* KW_LIST  */
+    GREATERTHAN = 279,             /* GREATERTHAN  */
+    LESSTHAN = 280,                /* LESSTHAN  */
+    DOTS = 281,                    /* DOTS  */
+    NUM = 282,                     /* NUM  */
+    STRING = 283,                  /* STRING  */
+    IDENT = 284                    /* IDENT  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Tokens.  */
-#define COMMA 258
-#define SEMI 259
-#define LPAR 260
-#define RPAR 261
-#define LCURLY 262
-#define RCURLY 263
-#define COLON 264
-#define LBRACK 265
-#define RBRACK 266
-#define KW_FLOAT 267
-#define KW_STRING 268
-#define KW_ENUM 269
-#define KW_UNK_ARGS 270
-#define KW_INTEGER 271
-#define KW_VIRTATTR 272
-#define KW_SHORT 273
-#define KW_OR 274
-#define KW_AND 275
-#define KW_BOOLEAN 276
-#define COLONEQ 277
-#define KW_LIST 278
-#define GREATERTHAN 279
-#define LESSTHAN 280
-#define DOTS 281
-#define NUM 282
-#define STRING 283
-#define IDENT 284
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-
 union YYSTYPE
 {
-#line 53 "syntax_parser.y" /* yacc.c:1909  */
+#line 53 "syntax_parser.y"
 
 	char *str;
 	double num;
@@ -124,9 +105,9 @@ union YYSTYPE
 	libsynt_head *head;
 	libsynt_technology *tech;
 
-#line 128 "syntax_parser.h" /* yacc.c:1909  */
-};
+#line 109 "syntax_parser.h"
 
+};
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -135,6 +116,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE syntax_parser_lval;
 
+
 int syntax_parser_parse (void);
+
 
 #endif /* !YY_SYNTAX_PARSER_SYNTAX_PARSER_H_INCLUDED  */
