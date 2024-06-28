@@ -1,6 +1,5 @@
 {
-    "files.associations": {
-        "strings.h": "c",
-        "liberty_structs.h": "c"
-    }
+    "cmake.preferredGenerators": [
+        "Ninja", "Unix Makefiles"
+    ]
 }
