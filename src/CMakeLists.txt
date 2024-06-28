@@ -7,31 +7,31 @@ if(MSVC)
 endif()
 
 # syntax_parse desc
-add_custom_command(
-  COMMENT "running syntax_parse ..."
-  COMMAND syntax_parse ${CMAKE_CURRENT_SOURCE_DIR}/desc
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  OUTPUT attr_lookup attr_enum.h group_lookup group_enum.h syntax_decls.c syntax_decls.h
-  DEPENDS desc/syntax.cmos.desc desc/syntax.fpga.desc
-)
+# add_custom_command(
+#   COMMENT "running syntax_parse ..."
+#   COMMAND syntax_parse ${CMAKE_CURRENT_SOURCE_DIR}/desc
+#   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#   OUTPUT attr_lookup attr_enum.h group_lookup group_enum.h syntax_decls.c syntax_decls.h
+#   DEPENDS desc/syntax.cmos.desc desc/syntax.fpga.desc
+# )
 
 # gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
-add_custom_command(
-  COMMENT "gperf generating group_lookup.c"
-  COMMAND gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  OUTPUT group_lookup.c
-  DEPENDS group_lookup
-)
+# add_custom_command(
+#   COMMENT "gperf generating group_lookup.c"
+#   COMMAND gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
+#   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#   OUTPUT group_lookup.c
+#   DEPENDS group_lookup
+# )
 
 # gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
-add_custom_command(
-  COMMENT "gperf generating attr_lookup.c"
-  COMMAND gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  OUTPUT attr_lookup.c
-  DEPENDS attr_lookup
-)
+# add_custom_command(
+#   COMMENT "gperf generating attr_lookup.c"
+#   COMMAND gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
+#   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#   OUTPUT attr_lookup.c
+#   DEPENDS attr_lookup
+# )
 
 # syntax_parse generated:
 # attr_enum.h
