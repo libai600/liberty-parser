@@ -1,23 +1,21 @@
 
 /* bison input file */
 %{
-   /******************************************************************************
-     Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
 
-     The contents of this file are subject to the restrictions and limitations
-     set forth in the SYNOPSYS Open Source License Version 1.0  (the "License"); 
-     you may not use this file except in compliance with such restrictions 
-     and limitations. You may obtain instructions on how to receive a copy of 
-     the License at
+/******************************************************************************
+  Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
+  The contents of this file are subject to the restrictions and limitations
+  set forth in the SYNOPSYS Open Source License Version 1.0  (the "License"); 
+  you may not use this file except in compliance with such restrictions 
+  and limitations. You may obtain instructions on how to receive a copy of 
+  the License at http://www.synopsys.com/partners/tapin/tapinprogram.html. 
 
-http://www.synopsys.com/partners/tapin/tapinprogram.html. 
+  Software distributed by Original Contributor under the License is 
+  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either 
+  expressed or implied. See the License for the specific language governing 
+  rights and limitations under the License.
+******************************************************************************/
 
-Software distributed by Original Contributor under the License is 
-distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either 
-expressed or implied. See the License for the specific language governing 
-rights and limitations under the License.
-
-    ******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,52 +36,50 @@ rights and limitations under the License.
 #include <alloca.h>
 #endif
 
-   static si2drGroupIdT gs[1000];
-   static int gsindex = 0;
+extern int yylex (void);
+extern int yyerror(char *s);
 
-   static si2drErrorT   err;
-   static si2drAttrTypeT atype;
-   static si2drAttrIdT curr_attr;
-   static si2drDefineIdT curr_def;
-   void push_group(liberty_head *h );
-   void pop_group(liberty_head *h);
-   si2drValueTypeT convert_vt(char *type);
-   int lineno;
-   int syntax_errors;
-   static char PB[8000]; /* so as not to have a bunch of local buffers */
-   extern int tight_colon_ok;
-   extern char token_comment_buf[SI2DR_MAX_STRING_LEN]; 
-   extern char token_comment_buf2[SI2DR_MAX_STRING_LEN];
-   static char token_comment_buft[SI2DR_MAX_STRING_LEN];
-   extern int tok_encountered;
-   extern char *curr_file;
-   extern liberty_strtable *master_string_table;
+static si2drGroupIdT gs[1000];
+static int gsindex = 0;
+static si2drErrorT   err;
+static si2drAttrTypeT atype;
+static si2drAttrIdT curr_attr;
+static si2drDefineIdT curr_def;
+void push_group(liberty_head *h );
+void pop_group(liberty_head *h);
+si2drValueTypeT convert_vt(char *type);
+int lineno;
+int syntax_errors;
+static char PB[8000]; /* so as not to have a bunch of local buffers */
+extern int tight_colon_ok;
+extern char token_comment_buf[SI2DR_MAX_STRING_LEN]; 
+extern char token_comment_buf2[SI2DR_MAX_STRING_LEN];
+static char token_comment_buft[SI2DR_MAX_STRING_LEN];
+extern int tok_encountered;
+extern char *curr_file;
+extern liberty_strtable *master_string_table;
+struct xnumber
+{
+   int type; /* 0=int, 1=float */
+   int intnum;
+   double floatnum;
+};
+typedef struct xnumber xnumber;
+void make_complex(liberty_head *h);
+void make_simple(char *name, liberty_attribute_value *v);
 
-   struct xnumber
-   {
-      int type; /* 0=int, 1=float */
-      int intnum;
-      double floatnum;
-   };
-   typedef struct xnumber xnumber;
+%}
 
-   void make_complex(liberty_head *h);
-   void make_simple(char *name, liberty_attribute_value *v);
-
-
-   %}
-
-   %union {
-      char *str;
-      xnumber num;
-      liberty_group *group;
-      liberty_attribute *attr;
-      liberty_attribute_value *val;
-      liberty_define *def;
-      liberty_head *head;
-      si2drExprT *expr;
-   }
-
+%union {
+   char *str;
+   xnumber num;
+   liberty_group *group;
+   liberty_attribute *attr;
+   liberty_attribute_value *val;
+   liberty_define *def;
+   liberty_head *head;
+   si2drExprT *expr;
+}
 
 %token COMMA SEMI LPAR RPAR LCURLY RCURLY COLON KW_DEFINE KW_DEFINE_GROUP KW_TRUE KW_FALSE PLUS MINUS MULT DIV EQ
 %token UNARY
@@ -601,8 +597,6 @@ void make_simple(char *name, liberty_attribute_value *v)
    my_free(v);
 }
 
-
-
 si2drValueTypeT convert_vt(char *type)
 {
    if( !strcmp(type,"string") )
@@ -616,7 +610,7 @@ si2drValueTypeT convert_vt(char *type)
    return SI2DR_UNDEFINED_VALUETYPE;
 }
 
-yyerror(char *s)
+int yyerror(char *s)
 {
    si2drErrorT err;
 

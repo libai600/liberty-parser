@@ -5055,12 +5055,12 @@ si2drStringT   si2drDefineGetAllowedGroupName( si2drDefineIdT def,
       if( (si2drObjectTypeT)(def.v1) != SI2DR_DEFINE )
       {
          *err = SI2DR_INVALID_OBJECTTYPE;
-         return;
+         return 0;
       }
       if( master_group_hash == 0 )
       {
          *err = SI2DR_INTERNAL_SYSTEM_ERROR;
-         return;
+         return 0;
       }
    }
    *err = SI2DR_NO_ERROR;
@@ -5084,12 +5084,12 @@ si2drValueTypeT   si2drDefineGetValueType( si2drDefineIdT def,
       if( (si2drObjectTypeT)(def.v1) != SI2DR_DEFINE )
       {
          *err = SI2DR_INVALID_OBJECTTYPE;
-         return;
+         return SI2DR_UNDEFINED_VALUETYPE;
       }
       if( master_group_hash == 0 )
       {
          *err = SI2DR_INTERNAL_SYSTEM_ERROR;
-         return;
+         return SI2DR_UNDEFINED_VALUETYPE;
       }
    }
    switch( d->valtype )

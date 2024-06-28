@@ -5,6 +5,7 @@ target_compile_definitions(syntax_parse PRIVATE HAVE_DIRENT_H)
 if(MSVC)
   target_include_directories(syntax_parse PRIVATE win BEFORE)
 endif()
+target_compile_options(syntax_parse PRIVATE "-Wno-format")
 
 # syntax_parse desc
 # add_custom_command(
@@ -41,8 +42,8 @@ endif()
 # syntax_decls.c
 # syntax_decls.h
 
-# gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k \* -D group_lookup --output-file=group_lookup.c
-# gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k \* -D attr_lookup --output-file=attr_lookup.c
+# gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D group_lookup --output-file=group_lookup.c
+# gperf -L ANSI-C -t -H attr_hash_func -N lookup_attr_name -C -I -k 1-255 -D attr_lookup --output-file=attr_lookup.c
 
 # flex synttok.l
 # bison syntax_parser.y -p syntax_parser_ -o syntax_parser.c -H
@@ -54,6 +55,7 @@ add_library(si2dr_liberty STATIC
   liberty_parser.c liberty_front_lex.c syntax_checks.c 
   syntax_decls.c group_lookup.c attr_lookup.c
 )
+target_compile_options(si2dr_liberty PRIVATE "-Wno-format")
 
 set_target_properties(si2dr_liberty PROPERTIES POSITION_INDEPENDENT_CODE TRUE) # -fPIC
 if(MSVC)
@@ -63,3 +65,4 @@ endif()
 add_executable(liberty_parse main.c)
 target_link_libraries(liberty_parse PRIVATE si2dr_liberty)
 target_compile_definitions(liberty_parse PRIVATE VERSION="2.5")
+target_compile_options(liberty_parse PRIVATE "-Wno-format")

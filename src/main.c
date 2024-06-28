@@ -23,6 +23,8 @@
 #include <sys/types.h>
 #include <time.h>
 
+extern void print_strtab_stats(void);
+
 static void print_version(void)
 {
 	printf("liberty_parse version %s\n\n", VERSION);

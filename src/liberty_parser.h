@@ -82,19 +82,18 @@ extern int liberty_parser_debug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 76 "liberty_parser.y"
+#line 73 "liberty_parser.y"
 
-      char *str;
-      xnumber num;
-      liberty_group *group;
-      liberty_attribute *attr;
-      liberty_attribute_value *val;
-      liberty_define *def;
-      liberty_head *head;
-      si2drExprT *expr;
-   
+   char *str;
+   xnumber num;
+   liberty_group *group;
+   liberty_attribute *attr;
+   liberty_attribute_value *val;
+   liberty_define *def;
+   liberty_head *head;
+   si2drExprT *expr;
 
-#line 98 "liberty_parser.h"
+#line 97 "liberty_parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -76,39 +76,41 @@
 /* First part of user prologue.  */
 #line 3 "syntax_parser.y"
 
+
 /******************************************************************************
-    Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
+  Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
 
   The contents of this file are subject to the restrictions and limitations
   set forth in the SYNOPSYS Open Source License Version 1.0  (the "License"); 
   you may not use this file except in compliance with such restrictions 
   and limitations. You may obtain instructions on how to receive a copy of 
-  the License at
-
-  http://www.synopsys.com/partners/tapin/tapinprogram.html. 
+  the License at http://www.synopsys.com/partners/tapin/tapinprogram.html. 
 
   Software distributed by Original Contributor under the License is 
   distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either 
   expressed or implied. See the License for the specific language governing 
   rights and limitations under the License.
-
 ******************************************************************************/
+
 #include <stdio.h>
 #include "syntax.h"
 #ifdef DMALLOC
 #include <dmalloc.h>
 #endif
 #include "mymalloc.h"
+
+extern int yylex (void);
+extern int yyerror(char *s);
 	
 static libsynt_group_info *gs[100];
 static int gsindex = 0;
 
- liberty_hash_table *libsynt_groups;
- liberty_hash_table *libsynt_allgroups;
- liberty_hash_table *libsynt_attrs;
+liberty_hash_table *libsynt_groups;
+liberty_hash_table *libsynt_allgroups;
+liberty_hash_table *libsynt_attrs;
 
- libsynt_technology libsynt_techs[20];
- int libsynt_tech_count = 0;
+libsynt_technology libsynt_techs[20];
+int libsynt_tech_count = 0;
  
 void push_group(libsynt_head *h);
 void pop_group(void);
@@ -119,12 +121,11 @@ libsynt_attribute_info *make_complex(libsynt_head *h);
  
 libsynt_attribute_info *make_simple(char *name, libsynt_attr_type type, void *constraint_ptr);
  
-
- static char *enumlist[100]; /* temps used in the process of building structs */
- static int enumcount;
+static char *enumlist[100]; /* temps used in the process of building structs */
+static int enumcount;
  
 
-#line 128 "syntax_parser.c"
+#line 129 "syntax_parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -1246,25 +1247,25 @@ yyreduce:
   case 2: /* file: group  */
 #line 90 "syntax_parser.y"
                 { libsynt_techs[libsynt_tech_count++].lib = (yyvsp[0].group); }
-#line 1250 "syntax_parser.c"
+#line 1251 "syntax_parser.c"
     break;
 
   case 3: /* $@1: %empty  */
 #line 93 "syntax_parser.y"
                       {push_group((yyvsp[-1].head));}
-#line 1256 "syntax_parser.c"
+#line 1257 "syntax_parser.c"
     break;
 
   case 4: /* group: head LCURLY $@1 statements RCURLY  */
 #line 93 "syntax_parser.y"
                                                           {(yyval.group) = gs[gsindex-1];pop_group();}
-#line 1262 "syntax_parser.c"
+#line 1263 "syntax_parser.c"
     break;
 
   case 5: /* $@2: %empty  */
 #line 94 "syntax_parser.y"
                       {push_group((yyvsp[-1].head));}
-#line 1268 "syntax_parser.c"
+#line 1269 "syntax_parser.c"
     break;
 
   case 6: /* group: head LCURLY $@2 RCURLY  */
@@ -1272,402 +1273,402 @@ yyreduce:
                                                {si2drObjectIdT toid;  (yyval.group) = gs[gsindex-1]; liberty_hash_lookup(libsynt_groups, gs[gsindex-1]->type, &toid);
                                                 if( toid.v1 != (void*)NULL )(yyval.group)->ref =(libsynt_group_info*)toid.v1;
                                                 else {printf("Error: line %d: Couldn't find group %s\n",(yyvsp[-3].head)->lineno,(yyvsp[-3].head)->ident); } pop_group();}
-#line 1276 "syntax_parser.c"
+#line 1277 "syntax_parser.c"
     break;
 
   case 7: /* statements: statement  */
 #line 100 "syntax_parser.y"
                             {}
-#line 1282 "syntax_parser.c"
+#line 1283 "syntax_parser.c"
     break;
 
   case 8: /* statements: statements statement  */
 #line 101 "syntax_parser.y"
                                                {}
-#line 1288 "syntax_parser.c"
+#line 1289 "syntax_parser.c"
     break;
 
   case 9: /* statement: simple_attr  */
 #line 105 "syntax_parser.y"
                               {si2drObjectIdT toid; toid.v1 = (void*)(yyvsp[0].attr);liberty_hash_enter_oid(gs[gsindex-1]->attr_hash, (yyvsp[0].attr)->name, toid);(yyvsp[0].attr)->next = gs[gsindex-1]->attr_list; gs[gsindex-1]->attr_list = (yyvsp[0].attr); }
-#line 1294 "syntax_parser.c"
+#line 1295 "syntax_parser.c"
     break;
 
   case 10: /* statement: complex_attr  */
 #line 106 "syntax_parser.y"
                                        {si2drObjectIdT toid;toid.v1 = (void*)(yyvsp[0].attr);liberty_hash_enter_oid(gs[gsindex-1]->attr_hash, (yyvsp[0].attr)->name, toid);(yyvsp[0].attr)->next = gs[gsindex-1]->attr_list; gs[gsindex-1]->attr_list = (yyvsp[0].attr);}
-#line 1300 "syntax_parser.c"
+#line 1301 "syntax_parser.c"
     break;
 
   case 11: /* statement: group  */
 #line 107 "syntax_parser.y"
                                  {si2drObjectIdT toid;toid.v1 = (void*)(yyvsp[0].group);liberty_hash_enter_oid(gs[gsindex-1]->group_hash, (yyvsp[0].group)->type,toid);(yyvsp[0].group)->next = gs[gsindex-1]->group_list; gs[gsindex-1]->group_list = (yyvsp[0].group);}
-#line 1306 "syntax_parser.c"
+#line 1307 "syntax_parser.c"
     break;
 
   case 12: /* simple_attr: IDENT COLON KW_VIRTATTR SEMI  */
 #line 110 "syntax_parser.y"
                                               { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_VIRTUAL,0);}
-#line 1312 "syntax_parser.c"
+#line 1313 "syntax_parser.c"
     break;
 
   case 13: /* simple_attr: IDENT COLON KW_STRING SEMI  */
 #line 111 "syntax_parser.y"
                                         { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_STRING,0);}
-#line 1318 "syntax_parser.c"
+#line 1319 "syntax_parser.c"
     break;
 
   case 14: /* simple_attr: IDENT COLON KW_STRING string_enum SEMI  */
 #line 112 "syntax_parser.y"
                                                     { (yyval.attr) = make_simple((yyvsp[-4].str),SYNTAX_ATTRTYPE_ENUM, (yyvsp[-1].str_enum));}
-#line 1324 "syntax_parser.c"
+#line 1325 "syntax_parser.c"
     break;
 
   case 15: /* simple_attr: IDENT COLON KW_FLOAT float_constraint SEMI  */
 #line 113 "syntax_parser.y"
                                                          { (yyval.attr) = make_simple((yyvsp[-4].str),SYNTAX_ATTRTYPE_FLOAT,(yyvsp[-1].float_constr));}
-#line 1330 "syntax_parser.c"
+#line 1331 "syntax_parser.c"
     break;
 
   case 16: /* simple_attr: IDENT COLON KW_FLOAT SEMI  */
 #line 114 "syntax_parser.y"
                                        { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_FLOAT,0);}
-#line 1336 "syntax_parser.c"
+#line 1337 "syntax_parser.c"
     break;
 
   case 17: /* simple_attr: IDENT COLON KW_ENUM string_enum SEMI  */
 #line 115 "syntax_parser.y"
                                                   { (yyval.attr) = make_simple((yyvsp[-4].str),SYNTAX_ATTRTYPE_ENUM, (yyvsp[-1].str_enum));}
-#line 1342 "syntax_parser.c"
+#line 1343 "syntax_parser.c"
     break;
 
   case 18: /* simple_attr: IDENT COLON KW_SHORT SEMI  */
 #line 116 "syntax_parser.y"
                                        { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_INT,0);}
-#line 1348 "syntax_parser.c"
+#line 1349 "syntax_parser.c"
     break;
 
   case 19: /* simple_attr: IDENT COLON KW_SHORT int_constraint SEMI  */
 #line 117 "syntax_parser.y"
                                                       { (yyval.attr) = make_simple((yyvsp[-4].str),SYNTAX_ATTRTYPE_INT,(yyvsp[-1].int_constr));}
-#line 1354 "syntax_parser.c"
+#line 1355 "syntax_parser.c"
     break;
 
   case 20: /* simple_attr: IDENT COLON KW_INTEGER SEMI  */
 #line 118 "syntax_parser.y"
                                          { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_INT,0);}
-#line 1360 "syntax_parser.c"
+#line 1361 "syntax_parser.c"
     break;
 
   case 21: /* simple_attr: IDENT COLON KW_INTEGER int_constraint SEMI  */
 #line 119 "syntax_parser.y"
                                                         { (yyval.attr) = make_simple((yyvsp[-4].str),SYNTAX_ATTRTYPE_INT,(yyvsp[-1].int_constr));}
-#line 1366 "syntax_parser.c"
+#line 1367 "syntax_parser.c"
     break;
 
   case 22: /* simple_attr: IDENT COLON KW_BOOLEAN SEMI  */
 #line 120 "syntax_parser.y"
                                          { (yyval.attr) = make_simple((yyvsp[-3].str),SYNTAX_ATTRTYPE_BOOLEAN,0);}
-#line 1372 "syntax_parser.c"
+#line 1373 "syntax_parser.c"
     break;
 
   case 23: /* string_enum: LPAR s_or_i_list RPAR  */
 #line 123 "syntax_parser.y"
                                     { int i; (yyval.str_enum) = (libsynt_string_enum*)my_calloc(sizeof(libsynt_string_enum),1); (yyval.str_enum)->array = (char**)my_calloc(sizeof(char*),enumcount+1);
                                             for(i=0;i<enumcount; i++){(yyval.str_enum)->array[i] = enumlist[i];} (yyval.str_enum)->size = enumcount;}
-#line 1379 "syntax_parser.c"
+#line 1380 "syntax_parser.c"
     break;
 
   case 24: /* s_or_i_list: s_or_i  */
 #line 127 "syntax_parser.y"
                      { enumcount=0; enumlist[enumcount++] = (yyvsp[0].str);}
-#line 1385 "syntax_parser.c"
+#line 1386 "syntax_parser.c"
     break;
 
   case 25: /* s_or_i_list: s_or_i_list COMMA s_or_i  */
 #line 128 "syntax_parser.y"
                                        { enumlist[enumcount++] = (yyvsp[0].str);}
-#line 1391 "syntax_parser.c"
+#line 1392 "syntax_parser.c"
     break;
 
   case 26: /* s_or_i_list: s_or_i_list COMMA KW_OR s_or_i  */
 #line 129 "syntax_parser.y"
                                              { enumlist[enumcount++] = (yyvsp[0].str);}
-#line 1397 "syntax_parser.c"
+#line 1398 "syntax_parser.c"
     break;
 
   case 27: /* float_constraint: LPAR GREATERTHAN NUM RPAR  */
 #line 133 "syntax_parser.y"
                                              {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->greater_than = (yyvsp[-1].num); (yyval.float_constr)->greater_specd =1; }
-#line 1403 "syntax_parser.c"
+#line 1404 "syntax_parser.c"
     break;
 
   case 28: /* float_constraint: LPAR LESSTHAN NUM RPAR  */
 #line 134 "syntax_parser.y"
                                           {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->less_than = (yyvsp[-1].num); (yyval.float_constr)->less_specd = 1; }
-#line 1409 "syntax_parser.c"
+#line 1410 "syntax_parser.c"
     break;
 
   case 29: /* float_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR  */
 #line 135 "syntax_parser.y"
                                                                  {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1);
                                                  (yyval.float_constr)->less_than = (yyvsp[-1].num); (yyval.float_constr)->less_specd = 1;(yyval.float_constr)->greater_than = (yyvsp[-4].num); (yyval.float_constr)->greater_specd =1;}
-#line 1416 "syntax_parser.c"
+#line 1417 "syntax_parser.c"
     break;
 
   case 30: /* float_constraint: COLONEQ NUM  */
 #line 137 "syntax_parser.y"
                                {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->default_value = (yyvsp[0].num); (yyval.float_constr)->default_specd =1;}
-#line 1422 "syntax_parser.c"
+#line 1423 "syntax_parser.c"
     break;
 
   case 31: /* float_constraint: LPAR GREATERTHAN NUM RPAR COLONEQ NUM  */
 #line 138 "syntax_parser.y"
                                                          {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->default_value = (yyvsp[0].num); (yyval.float_constr)->default_specd =1; (yyval.float_constr)->greater_than = (yyvsp[-3].num); (yyval.float_constr)->greater_specd =1; }
-#line 1428 "syntax_parser.c"
+#line 1429 "syntax_parser.c"
     break;
 
   case 32: /* float_constraint: LPAR LESSTHAN NUM RPAR COLONEQ NUM  */
 #line 139 "syntax_parser.y"
                                                       {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->default_value = (yyvsp[0].num); (yyval.float_constr)->default_specd =1;(yyval.float_constr)->less_than = (yyvsp[-3].num); (yyval.float_constr)->less_specd = 1; }
-#line 1434 "syntax_parser.c"
+#line 1435 "syntax_parser.c"
     break;
 
   case 33: /* float_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR COLONEQ NUM  */
 #line 140 "syntax_parser.y"
                                                                              {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->default_value = (yyvsp[0].num);
                                                  (yyval.float_constr)->less_than = (yyvsp[-3].num); (yyval.float_constr)->less_specd = 1;(yyval.float_constr)->greater_than = (yyvsp[-6].num); (yyval.float_constr)->greater_specd =1; (yyval.float_constr)->default_specd =1;}
-#line 1441 "syntax_parser.c"
+#line 1442 "syntax_parser.c"
     break;
 
   case 34: /* float_constraint: COLONEQ s_or_i  */
 #line 142 "syntax_parser.y"
                                   {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->refd_default = (yyvsp[0].str); (yyval.float_constr)->ref_default_specd =1;}
-#line 1447 "syntax_parser.c"
+#line 1448 "syntax_parser.c"
     break;
 
   case 35: /* float_constraint: LPAR GREATERTHAN NUM RPAR COLONEQ s_or_i  */
 #line 143 "syntax_parser.y"
                                                             {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->refd_default = (yyvsp[0].str);  (yyval.float_constr)->ref_default_specd =1;(yyval.float_constr)->greater_than = (yyvsp[-3].num); (yyval.float_constr)->greater_specd =1; }
-#line 1453 "syntax_parser.c"
+#line 1454 "syntax_parser.c"
     break;
 
   case 36: /* float_constraint: LPAR LESSTHAN NUM RPAR COLONEQ s_or_i  */
 #line 144 "syntax_parser.y"
                                                          {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->refd_default = (yyvsp[0].str); (yyval.float_constr)->ref_default_specd =1;(yyval.float_constr)->less_than = (yyvsp[-3].num); (yyval.float_constr)->less_specd = 1; }
-#line 1459 "syntax_parser.c"
+#line 1460 "syntax_parser.c"
     break;
 
   case 37: /* float_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR COLONEQ s_or_i  */
 #line 145 "syntax_parser.y"
                                                                                 {(yyval.float_constr) = (libsynt_float_constraint*)my_calloc(sizeof(libsynt_float_constraint),1); (yyval.float_constr)->refd_default = (yyvsp[0].str);
                                                  (yyval.float_constr)->less_than = (yyvsp[-3].num); (yyval.float_constr)->less_specd = 1;(yyval.float_constr)->greater_than = (yyvsp[-6].num); (yyval.float_constr)->greater_specd =1; (yyval.float_constr)->ref_default_specd =1;}
-#line 1466 "syntax_parser.c"
+#line 1467 "syntax_parser.c"
     break;
 
   case 38: /* int_constraint: LPAR GREATERTHAN NUM RPAR  */
 #line 149 "syntax_parser.y"
                                             {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->greater_than = (yyvsp[-1].num); (yyval.int_constr)->greater_specd =1; }
-#line 1472 "syntax_parser.c"
+#line 1473 "syntax_parser.c"
     break;
 
   case 39: /* int_constraint: LPAR LESSTHAN NUM RPAR  */
 #line 150 "syntax_parser.y"
                                         {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->less_than = (yyvsp[-1].num); (yyval.int_constr)->less_specd = 1; }
-#line 1478 "syntax_parser.c"
+#line 1479 "syntax_parser.c"
     break;
 
   case 40: /* int_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR  */
 #line 151 "syntax_parser.y"
                                                                {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1);
                                                                 (yyval.int_constr)->less_than = (yyvsp[-1].num); (yyval.int_constr)->less_specd = 1;(yyval.int_constr)->greater_than = (yyvsp[-4].num); (yyval.int_constr)->greater_specd =1;}
-#line 1485 "syntax_parser.c"
+#line 1486 "syntax_parser.c"
     break;
 
   case 41: /* int_constraint: COLONEQ NUM  */
 #line 153 "syntax_parser.y"
                              {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->default_value = (yyvsp[0].num); (yyval.int_constr)->default_specd =1;}
-#line 1491 "syntax_parser.c"
+#line 1492 "syntax_parser.c"
     break;
 
   case 42: /* int_constraint: LPAR GREATERTHAN NUM RPAR COLONEQ NUM  */
 #line 154 "syntax_parser.y"
                                                        {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->default_value = (yyvsp[0].num); (yyval.int_constr)->default_specd =1; (yyval.int_constr)->greater_than = (yyvsp[-3].num); (yyval.int_constr)->greater_specd =1; }
-#line 1497 "syntax_parser.c"
+#line 1498 "syntax_parser.c"
     break;
 
   case 43: /* int_constraint: LPAR LESSTHAN NUM RPAR COLONEQ NUM  */
 #line 155 "syntax_parser.y"
                                                     {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->default_value = (yyvsp[0].num); (yyval.int_constr)->default_specd =1;(yyval.int_constr)->less_than = (yyvsp[-3].num); (yyval.int_constr)->less_specd = 1; }
-#line 1503 "syntax_parser.c"
+#line 1504 "syntax_parser.c"
     break;
 
   case 44: /* int_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR COLONEQ NUM  */
 #line 156 "syntax_parser.y"
                                                                            {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->default_value = (yyvsp[0].num);
                                                                             (yyval.int_constr)->less_than = (yyvsp[-3].num); (yyval.int_constr)->less_specd = 1;(yyval.int_constr)->greater_than = (yyvsp[-6].num); (yyval.int_constr)->greater_specd =1; (yyval.int_constr)->default_specd =1;}
-#line 1510 "syntax_parser.c"
+#line 1511 "syntax_parser.c"
     break;
 
   case 45: /* int_constraint: COLONEQ s_or_i  */
 #line 158 "syntax_parser.y"
                                 {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->refd_default = (yyvsp[0].str); (yyval.int_constr)->ref_default_specd =1;}
-#line 1516 "syntax_parser.c"
+#line 1517 "syntax_parser.c"
     break;
 
   case 46: /* int_constraint: LPAR GREATERTHAN NUM RPAR COLONEQ s_or_i  */
 #line 159 "syntax_parser.y"
                                                           {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->refd_default = (yyvsp[0].str);  (yyval.int_constr)->ref_default_specd =1;(yyval.int_constr)->greater_than = (yyvsp[-3].num); (yyval.int_constr)->greater_specd =1; }
-#line 1522 "syntax_parser.c"
+#line 1523 "syntax_parser.c"
     break;
 
   case 47: /* int_constraint: LPAR LESSTHAN NUM RPAR COLONEQ s_or_i  */
 #line 160 "syntax_parser.y"
                                                        {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->refd_default = (yyvsp[0].str); (yyval.int_constr)->ref_default_specd =1;(yyval.int_constr)->less_than = (yyvsp[-3].num); (yyval.int_constr)->less_specd = 1; }
-#line 1528 "syntax_parser.c"
+#line 1529 "syntax_parser.c"
     break;
 
   case 48: /* int_constraint: LPAR GREATERTHAN NUM KW_AND LESSTHAN NUM RPAR COLONEQ s_or_i  */
 #line 161 "syntax_parser.y"
                                                                               {(yyval.int_constr) = (libsynt_int_constraint*)my_calloc(sizeof(libsynt_int_constraint),1); (yyval.int_constr)->refd_default = (yyvsp[0].str);
                                                                       (yyval.int_constr)->less_than = (yyvsp[-3].num); (yyval.int_constr)->less_specd = 1;(yyval.int_constr)->greater_than = (yyvsp[-6].num); (yyval.int_constr)->greater_specd =1; (yyval.int_constr)->ref_default_specd =1;}
-#line 1535 "syntax_parser.c"
+#line 1536 "syntax_parser.c"
     break;
 
   case 49: /* complex_attr: head SEMI  */
 #line 167 "syntax_parser.y"
                               { (yyval.attr)= make_complex((yyvsp[-1].head));}
-#line 1541 "syntax_parser.c"
+#line 1542 "syntax_parser.c"
     break;
 
   case 50: /* head: IDENT LPAR arg_or_namelist RPAR  */
 #line 170 "syntax_parser.y"
                                           { (yyval.head) = (yyvsp[-1].head); (yyval.head)->ident = (yyvsp[-3].str); (yyval.head)->lineno = synt_lineno;}
-#line 1547 "syntax_parser.c"
+#line 1548 "syntax_parser.c"
     break;
 
   case 51: /* head: KW_SHORT LPAR arg_or_namelist RPAR  */
 #line 171 "syntax_parser.y"
                                              { (yyval.head) = (yyvsp[-1].head); (yyval.head)->ident = "short"; (yyval.head)->lineno = synt_lineno;}
-#line 1553 "syntax_parser.c"
+#line 1554 "syntax_parser.c"
     break;
 
   case 52: /* arg_or_namelist: namelist  */
 #line 175 "syntax_parser.y"
                            {(yyval.head) = my_calloc(sizeof(libsynt_head),1); (yyval.head)->namecons = (yyvsp[0].nameconstr);}
-#line 1559 "syntax_parser.c"
+#line 1560 "syntax_parser.c"
     break;
 
   case 53: /* arg_or_namelist: arglist  */
 #line 176 "syntax_parser.y"
                                           {(yyval.head) = my_calloc(sizeof(libsynt_head),1); (yyval.head)->arglist = (yyvsp[0].arg);}
-#line 1565 "syntax_parser.c"
+#line 1566 "syntax_parser.c"
     break;
 
   case 54: /* namelist: %empty  */
 #line 179 "syntax_parser.y"
             {(yyval.nameconstr) = SYNTAX_GNAME_NONE;}
-#line 1571 "syntax_parser.c"
+#line 1572 "syntax_parser.c"
     break;
 
   case 55: /* namelist: IDENT  */
 #line 180 "syntax_parser.y"
                          {(yyval.nameconstr) = SYNTAX_GNAME_ONE;}
-#line 1577 "syntax_parser.c"
+#line 1578 "syntax_parser.c"
     break;
 
   case 56: /* namelist: LBRACK IDENT RBRACK  */
 #line 181 "syntax_parser.y"
                                        {(yyval.nameconstr) = SYNTAX_GNAME_NONE_OR_ONE;}
-#line 1583 "syntax_parser.c"
+#line 1584 "syntax_parser.c"
     break;
 
   case 57: /* namelist: IDENT LBRACK COMMA DOTS COMMA IDENT RBRACK  */
 #line 182 "syntax_parser.y"
                                                               {(yyval.nameconstr) = SYNTAX_GNAME_ONE_OR_MORE;}
-#line 1589 "syntax_parser.c"
+#line 1590 "syntax_parser.c"
     break;
 
   case 58: /* namelist: IDENT COMMA IDENT  */
 #line 183 "syntax_parser.y"
                                      {(yyval.nameconstr) = SYNTAX_GNAME_TWO;}
-#line 1595 "syntax_parser.c"
+#line 1596 "syntax_parser.c"
     break;
 
   case 59: /* namelist: IDENT COMMA IDENT COMMA IDENT  */
 #line 184 "syntax_parser.y"
                                                  {(yyval.nameconstr) = SYNTAX_GNAME_THREE;}
-#line 1601 "syntax_parser.c"
+#line 1602 "syntax_parser.c"
     break;
 
   case 60: /* arglist: KW_STRING  */
 #line 187 "syntax_parser.y"
                     { (yyval.arg)=my_calloc(sizeof(libsynt_argument),1); (yyval.arg)->type = SYNTAX_ATTRTYPE_STRING;}
-#line 1607 "syntax_parser.c"
+#line 1608 "syntax_parser.c"
     break;
 
   case 61: /* arglist: KW_INTEGER  */
 #line 188 "syntax_parser.y"
                      {(yyval.arg)=my_calloc(sizeof(libsynt_argument),1); (yyval.arg)->type = SYNTAX_ATTRTYPE_INT;}
-#line 1613 "syntax_parser.c"
+#line 1614 "syntax_parser.c"
     break;
 
   case 62: /* arglist: KW_FLOAT  */
 #line 189 "syntax_parser.y"
                    {(yyval.arg)=my_calloc(sizeof(libsynt_argument),1); (yyval.arg)->type = SYNTAX_ATTRTYPE_FLOAT;}
-#line 1619 "syntax_parser.c"
+#line 1620 "syntax_parser.c"
     break;
 
   case 63: /* arglist: KW_UNK_ARGS  */
 #line 190 "syntax_parser.y"
                       {(yyval.arg)=my_calloc(sizeof(libsynt_argument),1); (yyval.arg)->type = SYNTAX_ATTRTYPE_COMPLEX_UNKNOWN;}
-#line 1625 "syntax_parser.c"
+#line 1626 "syntax_parser.c"
     break;
 
   case 64: /* arglist: KW_LIST  */
 #line 191 "syntax_parser.y"
                   {(yyval.arg)=my_calloc(sizeof(libsynt_argument),1); (yyval.arg)->type = SYNTAX_ATTRTYPE_COMPLEX_LIST;}
-#line 1631 "syntax_parser.c"
+#line 1632 "syntax_parser.c"
     break;
 
   case 65: /* arglist: arglist COMMA KW_STRING  */
 #line 192 "syntax_parser.y"
                                   {libsynt_argument *x= my_calloc(sizeof(libsynt_argument),1),*y; x->type = SYNTAX_ATTRTYPE_STRING; for(y=(yyval.arg);y;y=y->next){if( !y->next){y->next=x;break;}}(yyval.arg)=(yyvsp[-2].arg);}
-#line 1637 "syntax_parser.c"
+#line 1638 "syntax_parser.c"
     break;
 
   case 66: /* arglist: arglist COMMA KW_INTEGER  */
 #line 193 "syntax_parser.y"
                                    {libsynt_argument *x= my_calloc(sizeof(libsynt_argument),1),*y; x->type = SYNTAX_ATTRTYPE_INT;for(y=(yyval.arg);y;y=y->next){if( !y->next){y->next=x;break;}}(yyval.arg)=(yyvsp[-2].arg);}
-#line 1643 "syntax_parser.c"
+#line 1644 "syntax_parser.c"
     break;
 
   case 67: /* arglist: arglist COMMA KW_FLOAT  */
 #line 194 "syntax_parser.y"
                                  {libsynt_argument *x= my_calloc(sizeof(libsynt_argument),1),*y; x->type = SYNTAX_ATTRTYPE_FLOAT;for(y=(yyval.arg);y;y=y->next){if( !y->next){y->next=x;break;}}(yyval.arg)=(yyvsp[-2].arg);}
-#line 1649 "syntax_parser.c"
+#line 1650 "syntax_parser.c"
     break;
 
   case 68: /* arglist: arglist COMMA KW_LIST  */
 #line 195 "syntax_parser.y"
                                 {libsynt_argument *x= my_calloc(sizeof(libsynt_argument),1),*y; x->type = SYNTAX_ATTRTYPE_COMPLEX_LIST;for(y=(yyval.arg);y;y=y->next){if( !y->next){y->next=x;break;}}(yyval.arg)=(yyvsp[-2].arg);}
-#line 1655 "syntax_parser.c"
+#line 1656 "syntax_parser.c"
     break;
 
   case 69: /* s_or_i: STRING  */
 #line 200 "syntax_parser.y"
                  {(yyval.str) = (yyvsp[0].str);}
-#line 1661 "syntax_parser.c"
+#line 1662 "syntax_parser.c"
     break;
 
   case 70: /* s_or_i: IDENT  */
 #line 201 "syntax_parser.y"
                         {(yyval.str)=(yyvsp[0].str);}
-#line 1667 "syntax_parser.c"
+#line 1668 "syntax_parser.c"
     break;
 
 
-#line 1671 "syntax_parser.c"
+#line 1672 "syntax_parser.c"
 
       default: break;
     }

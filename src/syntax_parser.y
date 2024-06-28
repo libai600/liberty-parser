@@ -1,39 +1,41 @@
 
 /* bison input file */
 %{
+
 /******************************************************************************
-    Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
+  Copyright (c) 1996-2005 Synopsys, Inc.    ALL RIGHTS RESERVED
 
   The contents of this file are subject to the restrictions and limitations
   set forth in the SYNOPSYS Open Source License Version 1.0  (the "License"); 
   you may not use this file except in compliance with such restrictions 
   and limitations. You may obtain instructions on how to receive a copy of 
-  the License at
-
-  http://www.synopsys.com/partners/tapin/tapinprogram.html. 
+  the License at http://www.synopsys.com/partners/tapin/tapinprogram.html. 
 
   Software distributed by Original Contributor under the License is 
   distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either 
   expressed or implied. See the License for the specific language governing 
   rights and limitations under the License.
-
 ******************************************************************************/
+
 #include <stdio.h>
 #include "syntax.h"
 #ifdef DMALLOC
 #include <dmalloc.h>
 #endif
 #include "mymalloc.h"
+
+extern int yylex (void);
+extern int yyerror(char *s);
 	
 static libsynt_group_info *gs[100];
 static int gsindex = 0;
 
- liberty_hash_table *libsynt_groups;
- liberty_hash_table *libsynt_allgroups;
- liberty_hash_table *libsynt_attrs;
+liberty_hash_table *libsynt_groups;
+liberty_hash_table *libsynt_allgroups;
+liberty_hash_table *libsynt_attrs;
 
- libsynt_technology libsynt_techs[20];
- int libsynt_tech_count = 0;
+libsynt_technology libsynt_techs[20];
+int libsynt_tech_count = 0;
  
 void push_group(libsynt_head *h);
 void pop_group(void);
@@ -44,9 +46,8 @@ libsynt_attribute_info *make_complex(libsynt_head *h);
  
 libsynt_attribute_info *make_simple(char *name, libsynt_attr_type type, void *constraint_ptr);
  
-
- static char *enumlist[100]; /* temps used in the process of building structs */
- static int enumcount;
+static char *enumlist[100]; /* temps used in the process of building structs */
+static int enumcount;
  
 %}
 
@@ -65,7 +66,6 @@ libsynt_attribute_info *make_simple(char *name, libsynt_attr_type type, void *co
 	libsynt_head *head;
 	libsynt_technology *tech;
 }
-
 
 %token COMMA SEMI LPAR RPAR LCURLY RCURLY COLON LBRACK RBRACK
 %token KW_FLOAT KW_STRING KW_ENUM KW_UNK_ARGS KW_INTEGER KW_VIRTATTR KW_SHORT KW_OR KW_AND KW_BOOLEAN COLONEQ KW_LIST GREATERTHAN LESSTHAN DOTS
