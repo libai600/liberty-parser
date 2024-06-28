@@ -1,5 +1,5 @@
 /* ANSI-C code produced by gperf version 3.1 */
-/* Command-line: gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k '*' -D --output-file=group_lookup.c group_lookup  */
+/* Command-line: gperf -L ANSI-C -t -H group_hash_func -N lookup_group_name -C -I -k 1-255 -D --output-file=group_lookup.c group_lookup  */
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
       && ('%' == 37) && ('&' == 38) && ('\'' == 39) && ('(' == 40) \

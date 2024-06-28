@@ -21,6 +21,7 @@ rights and limitations under the License.
 #include <stdarg.h>
 #include <math.h>
 #include <strings.h>
+#include <string.h>
 #include "liberty_structs.h"
 #include "libhash.h"
 #include "libstrtab.h"
