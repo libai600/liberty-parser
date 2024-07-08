@@ -11,6 +11,11 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# clangd
+.cache
+
 # build dir
 build/
+build-*/
 cmake-build/
+cmake-build-*/
