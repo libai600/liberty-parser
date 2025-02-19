@@ -25,11 +25,12 @@ rights and limitations under the License.
 #endif
 #include <stdarg.h>
 #include <math.h>
+#include <strings.h>
+#include <string.h>
 #include "liberty_structs.h"
 #include "libhash.h"
 #include "libstrtab.h"
 #include "si2dr_liberty.h"
-#include "string.h"
 #include "group_enum.h"
 #include "attr_enum.h"
 typedef struct libGroupMap { char *name; group_enum type; } libGroupMap;
@@ -4259,6 +4260,7 @@ si2drVoidT       si2drReadLibertyFile         ( char *filename,
 
    si2drPISetNocheckMode(err);
 
+#ifdef __linux
    if( !strcmp( filename+strlen(filename)-4, ".bz2") )
    {
       sprintf(comm,"bzip2 -cd %s", filename);
@@ -4306,6 +4308,9 @@ si2drVoidT       si2drReadLibertyFile         ( char *filename,
    }
    else
       liberty_parser2_in = fopen(filename,"r");
+#else
+   liberty_parser2_in = fopen(filename,"r");
+#endif
 
    if( liberty_parser2_in == (FILE *)NULL )
    {
@@ -4316,6 +4321,7 @@ si2drVoidT       si2drReadLibertyFile         ( char *filename,
 
    liberty_parser_parse();
 
+#ifdef __linux__
    if( strcmp( filename+strlen(filename)-3, ".gz")
          && strcmp( filename+strlen(filename)-2, ".Z")
          && strcmp( filename+strlen(filename)-4, ".bz2")
@@ -4324,6 +4330,9 @@ si2drVoidT       si2drReadLibertyFile         ( char *filename,
       fclose(liberty_parser2_in);
    else
       pclose(liberty_parser2_in);
+#else
+   fclose(liberty_parser2_in);
+#endif
 
    si2drPIUnSetNocheckMode(err);
    if( in_trace )

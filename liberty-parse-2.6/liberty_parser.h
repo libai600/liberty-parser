@@ -82,7 +82,7 @@ extern int liberty_parser_debug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 71 "liberty_parser.y"
+#line 75 "liberty_parser.y"
 
       char *str;
       xnumber num;

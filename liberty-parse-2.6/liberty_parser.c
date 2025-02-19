@@ -94,7 +94,11 @@ rights and limitations under the License.
 
     ******************************************************************************/
 #include <stdio.h>
+#ifdef _MSC_VER
+#include <malloc.h>
+#else
 #include <alloca.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "liberty_structs.h"
@@ -143,7 +147,7 @@ rights and limitations under the License.
 
    
 
-#line 147 "liberty_parser.c"
+#line 151 "liberty_parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -602,11 +606,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   102,   102,   102,   105,   105,   106,   106,   110,   111,
-     115,   116,   117,   118,   119,   122,   122,   123,   124,   124,
-     127,   128,   131,   131,   132,   136,   137,   150,   165,   174,
-     182,   183,   186,   200,   206,   215,   221,   234,   240,   246,
-     252,   328,   336,   344,   352,   360,   368,   376,   384,   402
+       0,   106,   106,   106,   109,   109,   110,   110,   114,   115,
+     119,   120,   121,   122,   123,   126,   126,   127,   128,   128,
+     131,   132,   135,   135,   136,   140,   141,   154,   169,   178,
+     186,   187,   190,   204,   210,   219,   225,   238,   244,   250,
+     256,   332,   340,   348,   356,   364,   372,   380,   388,   406
 };
 #endif
 
@@ -1220,139 +1224,139 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* $@1: %empty  */
-#line 102 "liberty_parser.y"
+#line 106 "liberty_parser.y"
           {lineno = 1; syntax_errors= 0;}
-#line 1226 "liberty_parser.c"
+#line 1230 "liberty_parser.c"
     break;
 
   case 3: /* file: $@1 group  */
-#line 102 "liberty_parser.y"
+#line 106 "liberty_parser.y"
                                                 {}
-#line 1232 "liberty_parser.c"
+#line 1236 "liberty_parser.c"
     break;
 
   case 4: /* $@2: %empty  */
-#line 105 "liberty_parser.y"
+#line 109 "liberty_parser.y"
                       {push_group((yyvsp[-1].head));}
-#line 1238 "liberty_parser.c"
+#line 1242 "liberty_parser.c"
     break;
 
   case 5: /* group: head LCURLY $@2 statements RCURLY  */
-#line 105 "liberty_parser.y"
+#line 109 "liberty_parser.y"
                                                           {pop_group((yyvsp[-4].head));}
-#line 1244 "liberty_parser.c"
+#line 1248 "liberty_parser.c"
     break;
 
   case 6: /* $@3: %empty  */
-#line 106 "liberty_parser.y"
+#line 110 "liberty_parser.y"
               {push_group((yyvsp[-1].head));}
-#line 1250 "liberty_parser.c"
+#line 1254 "liberty_parser.c"
     break;
 
   case 7: /* group: head LCURLY $@3 RCURLY  */
-#line 106 "liberty_parser.y"
+#line 110 "liberty_parser.y"
                                        {pop_group((yyvsp[-3].head));}
-#line 1256 "liberty_parser.c"
+#line 1260 "liberty_parser.c"
     break;
 
   case 8: /* statements: statement  */
-#line 110 "liberty_parser.y"
+#line 114 "liberty_parser.y"
                             {}
-#line 1262 "liberty_parser.c"
+#line 1266 "liberty_parser.c"
     break;
 
   case 9: /* statements: statements statement  */
-#line 111 "liberty_parser.y"
+#line 115 "liberty_parser.y"
                         {}
-#line 1268 "liberty_parser.c"
+#line 1272 "liberty_parser.c"
     break;
 
   case 10: /* statement: simple_attr  */
-#line 115 "liberty_parser.y"
+#line 119 "liberty_parser.y"
                               {}
-#line 1274 "liberty_parser.c"
+#line 1278 "liberty_parser.c"
     break;
 
   case 11: /* statement: complex_attr  */
-#line 116 "liberty_parser.y"
+#line 120 "liberty_parser.y"
                {}
-#line 1280 "liberty_parser.c"
+#line 1284 "liberty_parser.c"
     break;
 
   case 12: /* statement: define  */
-#line 117 "liberty_parser.y"
+#line 121 "liberty_parser.y"
          {}
-#line 1286 "liberty_parser.c"
+#line 1290 "liberty_parser.c"
     break;
 
   case 13: /* statement: define_group  */
-#line 118 "liberty_parser.y"
+#line 122 "liberty_parser.y"
                {}
-#line 1292 "liberty_parser.c"
+#line 1296 "liberty_parser.c"
     break;
 
   case 14: /* statement: group  */
-#line 119 "liberty_parser.y"
+#line 123 "liberty_parser.y"
          {}
-#line 1298 "liberty_parser.c"
+#line 1302 "liberty_parser.c"
     break;
 
   case 15: /* $@4: %empty  */
-#line 122 "liberty_parser.y"
+#line 126 "liberty_parser.y"
                                             { make_simple((yyvsp[-2].str),(yyvsp[0].val));}
-#line 1304 "liberty_parser.c"
+#line 1308 "liberty_parser.c"
     break;
 
   case 17: /* simple_attr: IDENT COLON attr_val_expr  */
-#line 123 "liberty_parser.y"
+#line 127 "liberty_parser.y"
                             { make_simple((yyvsp[-2].str),(yyvsp[0].val));}
-#line 1310 "liberty_parser.c"
+#line 1314 "liberty_parser.c"
     break;
 
   case 18: /* $@5: %empty  */
-#line 124 "liberty_parser.y"
+#line 128 "liberty_parser.y"
                             { make_simple((yyvsp[-2].str),(yyvsp[0].val));si2drSimpleAttrSetIsVar(curr_attr,&err); }
-#line 1316 "liberty_parser.c"
+#line 1320 "liberty_parser.c"
     break;
 
   case 20: /* complex_attr: head SEMI  */
-#line 127 "liberty_parser.y"
+#line 131 "liberty_parser.y"
                               {make_complex((yyvsp[-1].head));}
-#line 1322 "liberty_parser.c"
+#line 1326 "liberty_parser.c"
     break;
 
   case 21: /* complex_attr: head  */
-#line 128 "liberty_parser.y"
+#line 132 "liberty_parser.y"
         {make_complex((yyvsp[0].head));}
-#line 1328 "liberty_parser.c"
+#line 1332 "liberty_parser.c"
     break;
 
   case 22: /* $@6: %empty  */
-#line 131 "liberty_parser.y"
+#line 135 "liberty_parser.y"
                      {tight_colon_ok =1;}
-#line 1334 "liberty_parser.c"
+#line 1338 "liberty_parser.c"
     break;
 
   case 23: /* head: IDENT LPAR $@6 param_list RPAR  */
-#line 131 "liberty_parser.y"
+#line 135 "liberty_parser.y"
                                                           { (yyval.head) = (liberty_head*)my_calloc(sizeof(liberty_head),1); (yyval.head)->name = (yyvsp[-4].str); (yyval.head)->list = (yyvsp[-1].val); (yyval.head)->lineno = lineno;(yyval.head)->filename = curr_file; tight_colon_ok =0;}
-#line 1340 "liberty_parser.c"
+#line 1344 "liberty_parser.c"
     break;
 
   case 24: /* head: IDENT LPAR RPAR  */
-#line 132 "liberty_parser.y"
+#line 136 "liberty_parser.y"
                              { (yyval.head) = (liberty_head*)my_calloc(sizeof(liberty_head),1); (yyval.head)->name = (yyvsp[-2].str); (yyval.head)->list = 0; (yyval.head)->lineno = lineno;(yyval.head)->filename = curr_file;}
-#line 1346 "liberty_parser.c"
+#line 1350 "liberty_parser.c"
     break;
 
   case 25: /* param_list: attr_val  */
-#line 136 "liberty_parser.y"
+#line 140 "liberty_parser.y"
                        {(yyval.val)=(yyvsp[0].val);}
-#line 1352 "liberty_parser.c"
+#line 1356 "liberty_parser.c"
     break;
 
   case 26: /* param_list: param_list COMMA attr_val  */
-#line 138 "liberty_parser.y"
+#line 142 "liberty_parser.y"
 {
    liberty_attribute_value *v;
    for(v=(yyvsp[-2].val); v; v=v->next)
@@ -1365,11 +1369,11 @@ yyreduce:
    }
    (yyval.val) = (yyvsp[-2].val);
 }
-#line 1369 "liberty_parser.c"
+#line 1373 "liberty_parser.c"
     break;
 
   case 27: /* param_list: param_list attr_val  */
-#line 151 "liberty_parser.y"
+#line 155 "liberty_parser.y"
 {
    liberty_attribute_value *v;
    for(v=(yyvsp[-1].val); v; v=v->next)
@@ -1382,43 +1386,43 @@ yyreduce:
    }
    (yyval.val) = (yyvsp[-1].val);
 }
-#line 1386 "liberty_parser.c"
+#line 1390 "liberty_parser.c"
     break;
 
   case 28: /* define: KW_DEFINE LPAR s_or_i COMMA s_or_i COMMA s_or_i RPAR SEMI  */
-#line 166 "liberty_parser.y"
+#line 170 "liberty_parser.y"
 {curr_def = si2drGroupCreateDefine(gs[gsindex-1],(yyvsp[-6].str),(yyvsp[-4].str),convert_vt((yyvsp[-2].str)),&err);si2drObjectSetLineNo(curr_def,lineno,&err);si2drObjectSetFileName(curr_def,curr_file,&err);
    if( token_comment_buf[0] ) { si2drDefineSetComment(curr_def, token_comment_buf,&err); token_comment_buf[0]=0;} 
    if( token_comment_buf2[0] )	{strcpy(token_comment_buf, token_comment_buf2);token_comment_buf2[0] = 0;}
    tok_encountered = 0;
 }
-#line 1396 "liberty_parser.c"
+#line 1400 "liberty_parser.c"
     break;
 
   case 29: /* define_group: KW_DEFINE_GROUP LPAR s_or_i COMMA s_or_i RPAR SEMI  */
-#line 175 "liberty_parser.y"
+#line 179 "liberty_parser.y"
 {curr_def = si2drGroupCreateDefine(gs[gsindex-1],(yyvsp[-4].str),(yyvsp[-2].str),SI2DR_UNDEFINED_VALUETYPE,&err);si2drObjectSetLineNo(curr_def,lineno,&err);si2drObjectSetFileName(curr_def,curr_file,&err);
    if( token_comment_buf[0] ) { si2drDefineSetComment(curr_def, token_comment_buf,&err); token_comment_buf[0]=0;} 
    if( token_comment_buf2[0] )	{strcpy(token_comment_buf, token_comment_buf2);token_comment_buf2[0] = 0;}
    tok_encountered = 0;
 }
-#line 1406 "liberty_parser.c"
+#line 1410 "liberty_parser.c"
     break;
 
   case 30: /* s_or_i: STRING  */
-#line 182 "liberty_parser.y"
+#line 186 "liberty_parser.y"
                  {(yyval.str) = (yyvsp[0].str);}
-#line 1412 "liberty_parser.c"
+#line 1416 "liberty_parser.c"
     break;
 
   case 31: /* s_or_i: IDENT  */
-#line 183 "liberty_parser.y"
+#line 187 "liberty_parser.y"
         {(yyval.str)=(yyvsp[0].str);}
-#line 1418 "liberty_parser.c"
+#line 1422 "liberty_parser.c"
     break;
 
   case 32: /* attr_val: NUM  */
-#line 186 "liberty_parser.y"
+#line 190 "liberty_parser.y"
                { (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
               /* I get back a floating point number... not a string, and I have to 
                  tell if it's an integer, without using any math lib funcs? */
@@ -1433,21 +1437,21 @@ yyreduce:
                  (yyval.val)->u.double_val = (yyvsp[0].num).floatnum;
               }
            }
-#line 1437 "liberty_parser.c"
+#line 1441 "liberty_parser.c"
     break;
 
   case 33: /* attr_val: s_or_i  */
-#line 201 "liberty_parser.y"
+#line 205 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_STRING;
    (yyval.val)->u.string_val = (yyvsp[0].str);
 }
-#line 1447 "liberty_parser.c"
+#line 1451 "liberty_parser.c"
     break;
 
   case 34: /* attr_val: s_or_i COLON s_or_i  */
-#line 207 "liberty_parser.y"
+#line 211 "liberty_parser.y"
 {
    char *x;
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
@@ -1456,61 +1460,61 @@ yyreduce:
    sprintf(x, "%s:%s", (yyvsp[-2].str),(yyvsp[0].str));
    (yyval.val)->u.string_val = liberty_strtable_enter_string(master_string_table, x); /* scratchpad goes away after this */
 }
-#line 1460 "liberty_parser.c"
+#line 1464 "liberty_parser.c"
     break;
 
   case 35: /* attr_val: KW_TRUE  */
-#line 216 "liberty_parser.y"
+#line 220 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_BOOLEAN;
    (yyval.val)->u.bool_val = 1;
 }
-#line 1470 "liberty_parser.c"
+#line 1474 "liberty_parser.c"
     break;
 
   case 36: /* attr_val: KW_FALSE  */
-#line 222 "liberty_parser.y"
+#line 226 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_BOOLEAN;
    (yyval.val)->u.bool_val = 0;
 }
-#line 1480 "liberty_parser.c"
+#line 1484 "liberty_parser.c"
     break;
 
   case 37: /* attr_val_expr: STRING  */
-#line 235 "liberty_parser.y"
+#line 239 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_STRING;
    (yyval.val)->u.string_val = (yyvsp[0].str);
 }
-#line 1490 "liberty_parser.c"
+#line 1494 "liberty_parser.c"
     break;
 
   case 38: /* attr_val_expr: KW_TRUE  */
-#line 241 "liberty_parser.y"
+#line 245 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_BOOLEAN;
    (yyval.val)->u.bool_val = 1;
 }
-#line 1500 "liberty_parser.c"
+#line 1504 "liberty_parser.c"
     break;
 
   case 39: /* attr_val_expr: KW_FALSE  */
-#line 247 "liberty_parser.y"
+#line 251 "liberty_parser.y"
 {
    (yyval.val)= (liberty_attribute_value*)my_calloc(sizeof(liberty_attribute_value),1);
    (yyval.val)->type = LIBERTY__VAL_BOOLEAN;
    (yyval.val)->u.bool_val = 0;
 }
-#line 1510 "liberty_parser.c"
+#line 1514 "liberty_parser.c"
     break;
 
   case 40: /* attr_val_expr: expr  */
-#line 253 "liberty_parser.y"
+#line 257 "liberty_parser.y"
 {
    /* all the if/else if's are to reduce the total number of exprs to a minimum */
    if( (yyvsp[0].expr)->type == SI2DR_EXPR_VAL && (yyvsp[0].expr)->valuetype == SI2DR_FLOAT64 && !(yyvsp[0].expr)->left && !(yyvsp[0].expr)->right )
@@ -1584,11 +1588,11 @@ yyreduce:
       /* printf("left EXPR alone\n"); */
    }
 }
-#line 1588 "liberty_parser.c"
+#line 1592 "liberty_parser.c"
     break;
 
   case 41: /* expr: expr PLUS expr  */
-#line 329 "liberty_parser.y"
+#line 333 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1596,11 +1600,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[-2].expr);
    (yyval.expr)->right = (yyvsp[0].expr);
 }
-#line 1600 "liberty_parser.c"
+#line 1604 "liberty_parser.c"
     break;
 
   case 42: /* expr: expr MINUS expr  */
-#line 337 "liberty_parser.y"
+#line 341 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1608,11 +1612,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[-2].expr);
    (yyval.expr)->right = (yyvsp[0].expr);
 }
-#line 1612 "liberty_parser.c"
+#line 1616 "liberty_parser.c"
     break;
 
   case 43: /* expr: expr MULT expr  */
-#line 345 "liberty_parser.y"
+#line 349 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1620,11 +1624,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[-2].expr);
    (yyval.expr)->right = (yyvsp[0].expr);
 }
-#line 1624 "liberty_parser.c"
+#line 1628 "liberty_parser.c"
     break;
 
   case 44: /* expr: expr DIV expr  */
-#line 353 "liberty_parser.y"
+#line 357 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1632,11 +1636,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[-2].expr);
    (yyval.expr)->right = (yyvsp[0].expr);
 }
-#line 1636 "liberty_parser.c"
+#line 1640 "liberty_parser.c"
     break;
 
   case 45: /* expr: LPAR expr RPAR  */
-#line 361 "liberty_parser.y"
+#line 365 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1644,11 +1648,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[-1].expr);
    (yyval.expr)->right = 0;
 }
-#line 1648 "liberty_parser.c"
+#line 1652 "liberty_parser.c"
     break;
 
   case 46: /* expr: MINUS expr  */
-#line 369 "liberty_parser.y"
+#line 373 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1656,11 +1660,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[0].expr);
    (yyval.expr)->right = 0;
 }
-#line 1660 "liberty_parser.c"
+#line 1664 "liberty_parser.c"
     break;
 
   case 47: /* expr: PLUS expr  */
-#line 377 "liberty_parser.y"
+#line 381 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1668,11 +1672,11 @@ yyreduce:
    (yyval.expr)->left = (yyvsp[0].expr);
    (yyval.expr)->right = 0;
 }
-#line 1672 "liberty_parser.c"
+#line 1676 "liberty_parser.c"
     break;
 
   case 48: /* expr: NUM  */
-#line 385 "liberty_parser.y"
+#line 389 "liberty_parser.y"
 {
    si2drErrorT err;
    (yyval.expr) = si2drCreateExpr(SI2DR_EXPR_VAL,&err);
@@ -1690,11 +1694,11 @@ yyreduce:
    }
 
 }
-#line 1694 "liberty_parser.c"
+#line 1698 "liberty_parser.c"
     break;
 
   case 49: /* expr: IDENT  */
-#line 403 "liberty_parser.y"
+#line 407 "liberty_parser.y"
 {
    si2drErrorT err;
 
@@ -1704,11 +1708,11 @@ yyreduce:
    (yyval.expr)->left = 0;
    (yyval.expr)->right = 0;
 }
-#line 1708 "liberty_parser.c"
+#line 1712 "liberty_parser.c"
     break;
 
 
-#line 1712 "liberty_parser.c"
+#line 1716 "liberty_parser.c"
 
       default: break;
     }
@@ -1901,7 +1905,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 414 "liberty_parser.y"
+#line 418 "liberty_parser.y"
 
 
 void push_group(liberty_head *h )

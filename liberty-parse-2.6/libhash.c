@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <string.h>
 #include "libhash.h"
 #ifdef DMALLOC
