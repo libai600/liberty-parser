@@ -37,6 +37,9 @@ rights and limitations under the License.
 #endif
 #include "mymalloc.h" /* meant to override the my_*alloc calls if dmalloc defined*/
 
+   extern int yylex();
+   extern int yyerror(char *s);
+
    static si2drGroupIdT gs[1000];
    static int gsindex = 0;
 
@@ -615,7 +618,7 @@ si2drValueTypeT convert_vt(char *type)
    return SI2DR_UNDEFINED_VALUETYPE;
 }
 
-yyerror(char *s)
+int yyerror(char *s)
 {
    si2drErrorT err;
 

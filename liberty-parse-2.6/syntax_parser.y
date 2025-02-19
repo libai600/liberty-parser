@@ -24,6 +24,9 @@
 #include <dmalloc.h>
 #endif
 #include "mymalloc.h"
+
+extern int yylex();
+extern int yyerror(char *s);
 	
 static libsynt_group_info *gs[100];
 static int gsindex = 0;

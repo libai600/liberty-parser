@@ -5528,7 +5528,7 @@ static struct reference_time_vals
 	si2drGroupIdT oid[NUMENTRIES];
 } refvals;
 
-static check_retention_cell(si2drGroupIdT group)
+static void check_retention_cell(si2drGroupIdT group)
 {
 	si2drErrorT err;
 	si2drAttrIdT retention, power_gating;

@@ -89,7 +89,7 @@ extern int syntax_parser_debug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 53 "syntax_parser.y"
+#line 56 "syntax_parser.y"
 
 	char *str;
 	double num;
