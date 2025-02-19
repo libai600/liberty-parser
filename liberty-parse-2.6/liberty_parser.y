@@ -19,7 +19,11 @@ rights and limitations under the License.
 
     ******************************************************************************/
 #include <stdio.h>
+#ifdef _MSC_VER
+#include <malloc.h>
+#else
 #include <alloca.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "liberty_structs.h"
