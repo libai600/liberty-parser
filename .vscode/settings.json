@@ -1,0 +1,5 @@
+{
+    "cmake.preferredGenerators": [
+        "Ninja", "Unix Makefiles"
+    ]
+}
