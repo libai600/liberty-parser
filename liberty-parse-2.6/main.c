@@ -23,6 +23,8 @@
 #include <sys/types.h>
 #include <time.h>
 
+extern void print_strtab_stats(void);
+
 static void print_version(void)
 {
 	printf("liberty_parse version %s\n\n", VERSION);
@@ -136,7 +138,7 @@ int main(int argc, char **argv)
 	
 	time(&endt);
 
-	printf("... Done. \nElapsed time= %d seconds\n", endt-startt);
+	printf("... Done. \nElapsed time= %ld seconds\n", endt-startt);
 
 	groups = si2drPIGetGroups(&err);
 	
@@ -154,7 +156,7 @@ int main(int argc, char **argv)
 		else
 			printf("Errors detected\n\n");
 		
-		printf("... Done. \nElapsed time= %d seconds\n", endt-startt);
+		printf("... Done. \nElapsed time= %ld seconds\n", endt-startt);
 
 	}
 	si2drIterQuit(groups,&err);
@@ -182,7 +184,7 @@ int main(int argc, char **argv)
 			si2drWriteLibertyFile(buf1, group, NULL, &err);
 			time(&endt);
 			
-			printf("... Done. Elapsed time= %d seconds\n", endt-startt);
+			printf("... Done. Elapsed time= %ld seconds\n", endt-startt);
 			
 		}
 		si2drIterQuit(groups,&err);
